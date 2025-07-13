@@ -44,11 +44,13 @@ export function QuestionForm({ roomId }: QuestionFormProps) {
       question: '',
     },
   });
-
+  
   async function handleCreateQuestion(data: CreateQuestionFormData) {
     await createQuestion(data);
   }
-
+  
+  const { isSubmitting } = form.formState
+  
   return (
     <Card>
       <CardHeader>
@@ -72,6 +74,7 @@ export function QuestionForm({ roomId }: QuestionFormProps) {
                   <FormControl>
                     <Textarea
                       className="min-h-[100px]"
+                      disabled={isSubmitting}
                       placeholder="O que você gostaria de saber?"
                       {...field}
                     />
@@ -81,7 +84,7 @@ export function QuestionForm({ roomId }: QuestionFormProps) {
               )}
             />
 
-            <Button type="submit">Enviar pergunta</Button>
+            <Button disabled={isSubmitting} type="submit">Enviar pergunta</Button>
           </form>
         </Form>
       </CardContent>
